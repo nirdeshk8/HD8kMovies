@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>Download Movie - HD8kMovies</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-2xl bg-zinc-900 p-4 mb-8 text-center border border-dashed border-zinc-700">
+        <p class="text-xs text-zinc-500">ADVERTISEMENT</p>
+        </div>
+
+    <div class="bg-zinc-900 p-10 rounded-2xl border border-cyan-500 shadow-[0_0_30px_rgba(0,255,255,0.1)] text-center max-w-md w-full">
+        <h2 class="text-2xl font-bold mb-4">Your 8K Link is Generating...</h2>
+        
+        <div class="relative flex items-center justify-center mb-6">
+            <svg class="w-32 h-32 transform -rotate-90">
+                <circle cx="64" cy="64" r="58" stroke="currentColor" stroke-width="8" fill="transparent" class="text-zinc-800"/>
+                <circle id="progress-bar" cx="64" cy="64" r="58" stroke="currentColor" stroke-width="8" fill="transparent" stroke-dasharray="364.4" stroke-dashoffset="364.4" class="text-cyan-400 transition-all duration-1000 ease-linear"/>
+            </svg>
+            <span id="countdown-text" class="absolute text-3xl font-bold">10</span>
+        </div>
+
+        <p id="status-msg" class="text-zinc-400 text-sm">Please wait for 10 seconds</p>
+        
+        <button id="final-download" onclick="handleAdStep()" class="hidden mt-6 bg-cyan-500 hover:bg-cyan-400 text-black font-extrabold py-3 px-8 rounded-full transition-all scale-110">
+            VERIFY & DOWNLOAD
+        </button>
+    </div>
+
+    <script src="download-logic.js"></script>
+</body>
+</html>
