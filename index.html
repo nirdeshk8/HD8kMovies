@@ -4,68 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HD8kMovies - Best Free 8K Movies & Series</title>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8Q9CN8P9X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y8Q9CN8P9X');
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        .slider-container { width: 100%; overflow: hidden; background: #111; border-bottom: 1px solid #00ffff; padding: 5px 0; }
+        .slider-track { display: flex; width: max-content; animation: scroll 20s linear infinite; }
+        .slider-item { padding: 0 20px; font-size: 12px; font-weight: bold; color: #ccc; white-space: nowrap; }
+        .highlight { color: #00ffff; }
+        .red-tag { color: #ff0055; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .slider-track:hover { animation-play-state: paused; }
+    </style>
 </head>
 <body class="bg-[#050505] text-white font-[Poppins]">
 
     <nav class="bg-black border-b border-cyan-500 p-4 sticky top-0 z-[100] shadow-2xl">
         <div class="container mx-auto flex flex-wrap justify-between items-center gap-4">
-            <div class="flex items-center">
-                <div class="symbol-8k">8K</div>
-                <span class="text-3xl logo-font">HD8k<span class="text-cyan-400">Movies</span></span>
+            <div class="flex items-center cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="symbol-8k" style="background: linear-gradient(45deg, #00ffff, #0088ff); color: black; padding: 2px 10px; border-radius: 5px; font-weight: 800; margin-right: 10px; box-shadow: 0 0 15px #00ffff;">8K</div>
+                <span class="text-3xl" style="font-family: 'Bebas Neue', cursive; letter-spacing: 1px;">HD8k<span class="text-cyan-400">Movies</span></span>
             </div>
-            
             <div class="flex-1 max-w-xl relative">
                 <input type="text" id="live-search" placeholder="Search Movie, WWE, Series..." class="w-full bg-[#111] border border-zinc-800 p-2 rounded-lg focus:border-cyan-400 focus:outline-none">
                 <div id="search-results" class="absolute bg-zinc-900 w-full mt-1 rounded-lg z-[200] hidden border border-zinc-700 shadow-2xl"></div>
             </div>
-
             <div class="flex gap-4">
-                <button class="bg-blue-600 px-4 py-1 rounded text-xs font-bold uppercase">Telegram</button>
-                <button class="bg-zinc-800 px-4 py-1 rounded text-xs font-bold uppercase">Login</button>
+                <button class="bg-blue-600 px-4 py-1 rounded text-xs font-bold uppercase hover:bg-blue-500 transition">Telegram</button>
+                <button class="bg-zinc-800 px-4 py-1 rounded text-xs font-bold uppercase hover:bg-zinc-700 transition">Login</button>
             </div>
         </div>
     </nav>
 
     <div class="bg-zinc-900 overflow-x-auto whitespace-nowrap py-2 border-b border-zinc-800">
         <div class="container mx-auto px-4 flex space-x-6 text-[11px] font-bold uppercase tracking-wider">
-            <a href="#" class="text-cyan-400">Home🏠</a>
-            <a href="#">BollyWood</a>
-            <a href="#">HollyWood</a>
-            <a href="#">Hindi Dubbed</a>
-            <a href="#">South Hindi</a>
-            <a href="#">Web Series</a>
-            <a href="#" class="text-red-500">18+</a>
-            <a href="#">WWE</a>
-            <a href="#">300MB</a>
-            <a href="#">Punjabi</a>
+            <a href="#" onclick="filterCategory('All')" class="text-cyan-400">Home🏠</a>
+            <a href="#" onclick="filterCategory('Bollywood')" class="hover:text-cyan-400">BollyWood</a>
+            <a href="#" onclick="filterCategory('Hollywood')" class="hover:text-cyan-400">HollyWood</a>
+            <a href="#" onclick="filterCategory('South Dubbed')" class="hover:text-cyan-400">South Hindi</a>
+            <a href="#" onclick="filterCategory('Web Series')" class="hover:text-cyan-400">Web Series</a>
+            <a href="#" onclick="filterCategory('18+')" class="text-red-500 hover:text-red-400">18+</a>
+            <a href="#" onclick="filterCategory('WWE')" class="hover:text-cyan-400">WWE</a>
+            <a href="#" onclick="filterCategory('Punjabi')" class="hover:text-cyan-400">Punjabi</a>
+        </div>
+    </div>
+
+    <div class="slider-container">
+        <div class="slider-track">
+            <div class="flex">
+                <span class="slider-item">🔥 <span class="highlight">Mercy (2026)</span> 8K Added</span>
+                <span class="slider-item">⚡ <span class="red-tag">Vanaveera</span> 1080p Leaked</span>
+                <span class="slider-item">🎬 <span class="highlight">WWE Raw</span> Live Results</span>
+                <span class="slider-item">🔥 <span class="highlight">Bring Her Back</span> Dual Audio</span>
+            </div>
+            <div class="flex">
+                <span class="slider-item">🔥 <span class="highlight">Mercy (2026)</span> 8K Added</span>
+                <span class="slider-item">⚡ <span class="red-tag">Vanaveera</span> 1080p Leaked</span>
+                <span class="slider-item">🎬 <span class="highlight">WWE Raw</span> Live Results</span>
+                <span class="slider-item">🔥 <span class="highlight">Bring Her Back</span> Dual Audio</span>
+            </div>
         </div>
     </div>
 
     <div class="container mx-auto flex flex-col md:flex-row mt-6 px-4 gap-6">
-        
         <aside class="w-full md:w-1/4 space-y-6">
             <div class="bg-zinc-900 p-4 rounded-lg border-l-4 border-cyan-500">
                 <h3 class="text-sm font-bold mb-3 uppercase">Categories</h3>
                 <ul class="text-[12px] space-y-2 text-zinc-400">
-                    <li class="hover:text-cyan-400 cursor-pointer">Gujarati Movies</li>
-                    <li class="hover:text-cyan-400 cursor-pointer">VoiceOver Dubs</li>
-                    <li class="hover:text-cyan-400 cursor-pointer">Awards Section</li>
-                    <li class="hover:text-cyan-400 cursor-pointer">Movie Series Collection</li>
+                    <li onclick="filterCategory('Gujarati')" class="hover:text-cyan-400 cursor-pointer">Gujarati Movies</li>
+                    <li onclick="filterCategory('South Dubbed')" class="hover:text-cyan-400 cursor-pointer">South Hindi Dubbed</li>
+                    <li onclick="filterCategory('WWE')" class="hover:text-cyan-400 cursor-pointer">WWE Events</li>
                 </ul>
-            </div>
-            
-            <div class="bg-zinc-900 p-4 rounded-lg border-l-4 border-red-600">
-                <h3 class="text-sm font-bold mb-3 uppercase">Filter by Quality</h3>
-                <div class="grid grid-cols-2 gap-2 text-[10px]">
-                    <span class="bg-zinc-800 p-2 rounded text-center cursor-pointer">4K Ultra HD</span>
-                    <span class="bg-zinc-800 p-2 rounded text-center cursor-pointer">1080p HEVC</span>
-                    <span class="bg-zinc-800 p-2 rounded text-center cursor-pointer">720p Dual Audio</span>
-                    <span class="bg-zinc-800 p-2 rounded text-center cursor-pointer">300MB Movies</span>
-                </div>
             </div>
         </aside>
 
@@ -73,12 +93,15 @@
             <div class="bg-yellow-500 text-black text-[11px] font-bold p-2 rounded mb-6 text-center">
                 × Avoid FAKE Copies! Always use HD8kMovies.Tv With VPN for Latest Updates.
             </div>
-            
-            <div id="movie-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                </div>
+            <div id="movie-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <footer class="bg-black border-t border-zinc-800 mt-10 py-8 text-center">
+        <p class="text-zinc-600 text-[10px] font-medium">© 2019 - 2026 . All rights reserved.</p>
+    </footer>
+
+    <script src="assets/js/movie-data.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

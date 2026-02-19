@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>HD8k ADMIN HUB | Master Control V4.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --accent: #00ffff; --bg: #050505; }
+        body { background: var(--bg); color: #e5e7eb; font-family: 'Poppins', sans-serif; overflow: hidden; }
+        .sidebar-item { @apply flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-zinc-400 hover:bg-zinc-800 cursor-pointer text-sm font-medium; }
+        .active-tab { @apply bg-cyan-600 text-white shadow-[0_0_20px_rgba(0,255,255,0.3)]; }
+        .view-div { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        textarea::placeholder { color: #444; }
+    </style>
+</head>
+<body class="flex h-screen">
+
+    <div id="login-overlay" class="fixed inset-0 bg-black z-[1000] flex items-center justify-center p-6">
+        <div class="bg-zinc-900 p-8 rounded-3xl w-full max-w-md border border-cyan-500/30 text-center shadow-2xl">
+            <div class="bg-cyan-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_#00ffff]">
+                <i class="fa fa-lock text-black text-2xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-white mb-6">Admin Login</h2>
+            <input type="password" id="admin-pass" placeholder="Enter Master Password" class="w-full bg-black border border-zinc-800 p-4 rounded-xl text-white text-center mb-4 focus:border-cyan-500 outline-none transition">
+            <button onclick="checkPass()" class="w-full bg-cyan-500 text-black font-black py-4 rounded-xl hover:bg-white transition duration-300">UNLOCK HUB</button>
+        </div>
+    </div>
+
+    <aside id="sidebar" class="w-80 bg-[#080808] border-r border-zinc-900 flex flex-col hidden md:flex transition-all duration-300">
+        <div class="p-6 flex items-center gap-3 border-b border-zinc-900 sticky top-0 bg-[#080808] z-50">
+            <div class="bg-cyan-500 text-black font-black px-3 py-1 rounded shadow-[0_0_15px_#00ffff]">8K</div>
+            <h1 class="text-white font-bold text-lg tracking-tighter">HD8k<span class="text-cyan-400">ADMIN</span></h1>
+        </div>
+
+        <nav class="p-4 space-y-6 overflow-y-auto">
+            <div>
+                <p class="text-[10px] text-zinc-600 font-bold uppercase mb-2 px-2">Core Control</p>
+                <div onclick="showTab('dashboard', this)" class="sidebar-item active-tab"><i class="fa fa-chart-line"></i> 3. Dashboard</div>
+                <div onclick="showTab('ads-hub', this)" class="sidebar-item text-yellow-500"><i class="fa fa-dollar-sign"></i> 6. Ads Manager Hub</div>
+                <div onclick="showTab('users', this)" class="sidebar-item"><i class="fa fa-user-shield"></i> 2. Users Mgt</div>
+            </div>
+            <div>
+                <p class="text-[10px] text-zinc-600 font-bold uppercase mb-2 px-2">CMS</p>
+                <div onclick="showTab('add-movie', this)" class="sidebar-item"><i class="fa fa-plus-circle"></i> 7. Add Movie</div>
+                <div onclick="showTab('media', this)" class="sidebar-item"><i class="fa fa-images"></i> 19. Media Library</div>
+            </div>
+            <div>
+                <p class="text-[10px] text-zinc-600 font-bold uppercase mb-2 px-2">System</p>
+                <div onclick="showTab('security', this)" class="sidebar-item"><i class="fa fa-shield-alt"></i> 12. Security</div>
+                <div onclick="showTab('settings', this)" class="sidebar-item"><i class="fa fa-cog"></i> 9. Settings</div>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col bg-[#050505]">
+        <header class="h-20 border-b border-zinc-900 flex justify-between items-center px-8 bg-zinc-900/30 backdrop-blur-md sticky top-0 z-40">
+            <div class="flex items-center gap-4">
+                <i onclick="toggleMenu()" class="fa fa-bars text-zinc-400 cursor-pointer text-xl hover:text-cyan-400"></i>
+                <h2 id="header-title" class="text-xl font-bold text-white uppercase tracking-widest">Dashboard</h2>
+            </div>
+            <div class="bg-zinc-800 px-4 py-2 rounded-full border border-zinc-700 flex items-center gap-2">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span class="text-[10px] font-bold">SERVER: 8082 ONLINE</span>
+            </div>
+        </header>
+
+        <div class="p-10 overflow-y-auto flex-1">
+            
+            <div id="tab-ads-hub" class="view-div hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800 border-t-4 border-t-yellow-500">
+                        <h3 class="text-yellow-500 font-bold mb-4 uppercase tracking-widest">6. Revenue Customization</h3>
+                        <p class="text-xs text-zinc-500 mb-6">Paste your Ad scripts here. These will be automatically injected into your website.</p>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="text-[10px] text-zinc-400 font-bold uppercase mb-2 block">Header Ad Script (728x90)</label>
+                                <textarea id="ad-header-code" placeholder="<script>...</script>" class="w-full bg-black border border-zinc-800 p-4 rounded-xl text-xs text-green-500 font-mono h-24 outline-none focus:border-yellow-500"></textarea>
+                            </div>
+                            <div>
+                                <label class="text-[10px] text-zinc-400 font-bold uppercase mb-2 block">Pop-Under / Redirect Ad</label>
+                                <textarea id="ad-pop-code" placeholder="Paste Pop-Ad code here..." class="w-full bg-black border border-zinc-800 p-4 rounded-xl text-xs text-green-500 font-mono h-24 outline-none focus:border-yellow-500"></textarea>
+                            </div>
+                            <button onclick="saveAds()" class="w-full bg-yellow-600 text-black font-black py-4 rounded-2xl hover:bg-white transition-all shadow-xl">APPLY ADS & START EARNING</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800 flex flex-col justify-center items-center text-center">
+                        <i class="fa fa-wallet text-6xl text-zinc-800 mb-4"></i>
+                        <h4 class="text-zinc-500 text-sm font-bold uppercase tracking-widest">Estimated Revenue</h4>
+                        <div class="text-6xl font-black text-white mt-2">$0.00</div>
+                        <p class="text-zinc-600 text-[10px] mt-4 uppercase">Sync your Ad Network API in Point 14 to see real-time data.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-dashboard" class="view-div">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-zinc-900 p-8 rounded-3xl border border-zinc-800 border-l-4 border-l-cyan-500 shadow-xl">
+                        <p class="text-zinc-500 text-xs font-bold uppercase tracking-widest">Total Impressions</p>
+                        <h3 class="text-4xl font-black mt-2">145.2K</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-add-movie" class="view-div hidden">
+                <div class="bg-zinc-900/50 p-8 rounded-3xl border border-zinc-800 mb-8">
+                    <h3 class="text-cyan-400 font-bold mb-6 italic underline">7. Content Management: Auto Scraper</h3>
+                    <div class="flex gap-4 mb-10">
+                        <input type="text" id="target-url" placeholder="Paste HDHub4u Movie URL..." class="flex-1 bg-black border border-zinc-700 p-4 rounded-2xl outline-none focus:border-cyan-500 transition shadow-inner">
+                        <button onclick="runScraper()" id="fetch-btn" class="bg-cyan-500 text-black font-black px-10 rounded-2xl hover:bg-white transition-all transform active:scale-95">FETCH</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                        <div class="space-y-4">
+                            <input type="text" id="m-title" placeholder="Title" class="w-full bg-[#111] p-4 rounded-xl border border-zinc-800">
+                            <input type="text" id="m-poster" placeholder="Poster URL" class="w-full bg-[#111] p-4 rounded-xl border border-zinc-800">
+                            <textarea id="m-plot" placeholder="Storyline" class="w-full bg-[#111] p-4 rounded-xl border border-zinc-800 h-32"></textarea>
+                            <input type="text" id="m-download" placeholder="Direct Download Link" class="w-full bg-cyan-500/10 p-4 rounded-xl border border-cyan-500/30 text-cyan-400 font-bold">
+                            <button onclick="publish()" class="w-full bg-green-600 py-5 rounded-2xl font-black text-white hover:bg-green-500 uppercase tracking-widest shadow-2xl transition">Publish Live</button>
+                        </div>
+                        <div class="bg-black/40 p-6 rounded-3xl border border-zinc-800 flex flex-col items-center">
+                            <p class="text-[10px] text-zinc-600 font-bold uppercase mb-4">Poster Preview</p>
+                            <img id="m-preview" src="https://via.placeholder.com/300x450/111/333?text=Preview" class="w-64 rounded-2xl shadow-2xl border border-zinc-800">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-users" class="view-div hidden glass p-20 rounded-3xl text-center border border-zinc-800 bg-zinc-900">
+                <i class="fa fa-user-lock text-6xl text-zinc-700 mb-6"></i>
+                <h2 class="text-2xl font-bold">2. User Management Hub</h2>
+                <p class="text-zinc-500 mt-2">Active Database Sync Required to manage users.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function checkPass() {
+            if(document.getElementById('admin-pass').value === "nova123") {
+                document.getElementById('login-overlay').style.display = 'none';
+            } else { alert("Abe Galat Password Hai!"); }
+        }
+
+        function showTab(id, el) {
+            document.querySelectorAll('.view-div').forEach(v => v.classList.add('hidden'));
+            document.getElementById('tab-' + id).classList.remove('hidden');
+            document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active-tab'));
+            el.classList.add('active-tab');
+            document.getElementById('header-title').innerText = el.innerText.trim();
+        }
+
+        function toggleMenu() {
+            const sb = document.getElementById('sidebar');
+            sb.classList.toggle('hidden');
+        }
+
+        async function saveAds() {
+            const adData = {
+                headerAd: document.getElementById('ad-header-code').value,
+                popAd: document.getElementById('ad-pop-code').value
+            };
+            try {
+                const res = await fetch('/api/save-ads', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(adData)
+                });
+                const result = await res.json();
+                if(result.status === "success") alert("🔥 Ad Settings Updated! Ab paise banenge.");
+            } catch (e) { alert("Engine Error!"); }
+        }
+
+        async function runScraper() {
+            const url = document.getElementById('target-url').value;
+            const btn = document.getElementById('fetch-btn');
+            btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
+            try {
+                const res = await fetch('/api/scrape', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({url: url})
+                });
+                const data = await res.json();
+                if(data.status === "success") {
+                    document.getElementById('m-title').value = data.title;
+                    document.getElementById('m-poster').value = data.poster;
+                    document.getElementById('m-preview').src = data.poster;
+                    document.getElementById('m-plot').value = data.plot;
+                }
+            } catch (e) { alert("Engine Error!"); }
+            btn.innerText = "FETCH";
+        }
+
+        async function publish() {
+            const movie = {
+                id: Date.now().toString(),
+                title: document.getElementById('m-title').value,
+                poster: document.getElementById('m-poster').value,
+                tags: ["Admin", "8k Pro"],
+                info: { director: "N/A", cast: "N/A", lang: "Hindi", quality: "1080p" },
+                plot: document.getElementById('m-plot').value,
+                screenshots: [],
+                links: { "1080p": document.getElementById('m-download').value }
+            };
+            const res = await fetch('/api/publish', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(movie)
+            });
+            const result = await res.json();
+            if(result.status === "success") {
+                alert("Mubarak ho! Movie live ho gayi.");
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+</body>
+</html>
